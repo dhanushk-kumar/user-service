@@ -11,4 +11,5 @@ public interface UserService {
     public List<UserDto> getUsers(Integer page,Integer pageSize);
     public String deleteUser(String userId);
     public UserDto getUserDetails(String userId);
+    public UserDto updateUser(long userId, User user) throws UserNotExist;
 }
