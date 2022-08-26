@@ -54,4 +54,18 @@ public class UserServiceImpl implements UserService {
         User getResult=repository.findById(Long.valueOf(userId)).orElseThrow(() -> new UserNotExist("user not found"));
         return toDto(getResult);
     }
+
+    @Override
+    public UserDto updateUser(long userId, User user) {
+        User updateUser = repository.findById(userId).orElseThrow(()-> new UserNotExist("User Not Found"));
+        updateUser.setFirstName(user.getFirstName());
+        updateUser.setLastName(user.getLastName());
+        updateUser.setMiddleName(user.getMiddleName());
+        updateUser.setPhoneNumber(user.getPhoneNumber());
+        updateUser.setEmail(user.getEmail());
+        updateUser.setAddress(user.getAddress());
+        updateUser.setDateOfBirth(user.getDateOfBirth());
+        updateUser.setGender(user.getGender());
+        return toDto(repository.save(updateUser));
+    }
 }
