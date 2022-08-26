@@ -20,4 +20,9 @@ public class UserController {
         UserDto userDtoResponse = userService.createUser(userResponse);
         return new ResponseEntity<UserDto>(userDtoResponse, HttpStatus.OK);
     }
+    @GetMapping("users")
+    public ResponseEntity<List<UserDto>> getUsers(@RequestParam(defaultValue = "0") Integer page,@RequestParam(defaultValue = "10") Integer pageSize){
+        List<UserDto> userResponses = userService.getUsers(page,pageSize);
+        return new ResponseEntity<List<UserDto>>(userResponses, HttpStatus.OK);
+    }
 }
