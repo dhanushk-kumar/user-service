@@ -21,5 +21,12 @@ import static com.maveric.userservice.utility.ModelDtoTransformer.toEntity;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-
+    @Autowired
+    private UserRepository repository;
+    public UserDto createUser(UserDto userResponse) {
+        //Adding CreatedTime
+        User account = toEntity(userResponse);
+        User accountResult = repository.save(account);
+        return  toDto(accountResult);
+    }
 }

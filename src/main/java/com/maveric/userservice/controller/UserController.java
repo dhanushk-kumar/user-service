@@ -13,5 +13,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1")
 public class UserController {
-
+    @Autowired
+    UserService userService;
+    @PostMapping("users")
+    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userResponse) {
+        UserDto userDtoResponse = userService.createUser(userResponse);
+        return new ResponseEntity<UserDto>(userDtoResponse, HttpStatus.OK);
+    }
 }
