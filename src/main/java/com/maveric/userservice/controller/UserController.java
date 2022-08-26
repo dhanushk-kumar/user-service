@@ -10,25 +10,23 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
 @RequestMapping("/api/v1")
+@RestController
 public class UserController {
+
     @Autowired
     UserService userService;
+
+    @GetMapping("users")
+    public ResponseEntity<List<UserDto>> getUsers(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "10") Integer pageSize){
+        List<UserDto> userResponses = userService.getUsers(page,pageSize);
+        return new ResponseEntity<List<UserDto>>(userResponses, HttpStatus.OK);
+    }
+
     @PostMapping("users")
     public ResponseEntity<UserDto> createUser(@RequestBody UserDto userResponse) {
         UserDto userDtoResponse = userService.createUser(userResponse);
         return new ResponseEntity<UserDto>(userDtoResponse, HttpStatus.OK);
-    }
-    @GetMapping("users")
-    public ResponseEntity<List<UserDto>> getUsers(@RequestParam(defaultValue = "0") Integer page,@RequestParam(defaultValue = "10") Integer pageSize){
-        List<UserDto> userResponses = userService.getUsers(page,pageSize);
-        return new ResponseEntity<List<UserDto>>(userResponses, HttpStatus.OK);
-    }
-    @DeleteMapping("users/{userId}")
-    public ResponseEntity<String> deleteUser(@PathVariable String userId) {
-        String result = userService.deleteUser(userId);
-        return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
     @GetMapping("users/{userId}")
@@ -41,9 +39,19 @@ public class UserController {
     public ResponseEntity<UserDto> updateUser(@PathVariable long userId, @RequestBody User User){
         return new ResponseEntity<UserDto>(userService.updateUser(userId, User), HttpStatus.OK);
     }
+
+    @DeleteMapping("users/{userId}")
+    public ResponseEntity<String> deleteUser(@PathVariable String userId) {
+        String result = userService.deleteUser(userId);
+        return new ResponseEntity<String>(result, HttpStatus.OK);
+    }
+
     @GetMapping("users/getUserByEmail/{email}")
     public ResponseEntity<UserDto> getUserDetailsByEmail(@PathVariable String email) {
         UserDto res = userService.getUserDetailsByEmail(email);
         return new ResponseEntity<UserDto>(res, HttpStatus.OK);
     }
+
+
+
 }
