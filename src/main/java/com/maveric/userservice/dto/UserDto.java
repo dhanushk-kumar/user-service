@@ -1,13 +1,12 @@
 package com.maveric.userservice.dto;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
-@AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class UserDto {
 
     private long id;

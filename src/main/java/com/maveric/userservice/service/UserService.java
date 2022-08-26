@@ -7,10 +7,16 @@ import com.maveric.userservice.model.User;
 import java.util.List;
 
 public interface UserService {
+    public List<UserDto> getUsers(Integer page, Integer pageSize);
     public UserDto createUser(UserDto userResponse);
-    public List<UserDto> getUsers(Integer page,Integer pageSize);
-    public String deleteUser(String userId);
+
     public UserDto getUserDetails(String userId);
-    public UserDto updateUser(long userId, User user) throws UserNotExist;
+
+    public String deleteUser(String userId);
+
     public UserDto  getUserDetailsByEmail(String email);
+
+    public UserDto updateUser(long userId, User user) throws UserNotExist;
+
+
 }
