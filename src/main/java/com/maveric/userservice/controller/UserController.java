@@ -30,4 +30,10 @@ public class UserController {
         String result = userService.deleteUser(userId);
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
+
+    @GetMapping("users/{userId}")
+    public ResponseEntity<UserDto> getUserDetails(@PathVariable String userId) {
+        UserDto userDtoResponse = userService.getUserDetails(userId);
+        return new ResponseEntity<UserDto>(userDtoResponse, HttpStatus.OK);
+    }
 }

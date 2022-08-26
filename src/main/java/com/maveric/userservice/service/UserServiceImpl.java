@@ -49,4 +49,9 @@ public class UserServiceImpl implements UserService {
         repository.deleteById(Long.valueOf(userId));
         return "The user is deleted successfully.";
     }
+    @Override
+    public UserDto getUserDetails(String userId) {
+        User getResult=repository.findById(Long.valueOf(userId)).orElseThrow(() -> new UserNotExist("user not found"));
+        return toDto(getResult);
+    }
 }
