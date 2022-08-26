@@ -1,0 +1,22 @@
+package com.maveric.userservice.dto;
+
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
+public class UserDto {
+
+    private long id;
+    private String firstName;
+    private String lastName;
+    private String middleName;
+    private String phoneNumber;
+    private String email;
+    private String address;
+    private String dateOfBirth;
+    private String gender;
+}
