@@ -25,4 +25,9 @@ public class UserController {
         List<UserDto> userResponses = userService.getUsers(page,pageSize);
         return new ResponseEntity<List<UserDto>>(userResponses, HttpStatus.OK);
     }
+    @DeleteMapping("users/{userId}")
+    public ResponseEntity<String> deleteUser(@PathVariable String userId) {
+        String result = userService.deleteUser(userId);
+        return new ResponseEntity<String>(result, HttpStatus.OK);
+    }
 }
