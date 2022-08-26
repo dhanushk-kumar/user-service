@@ -68,4 +68,9 @@ public class UserServiceImpl implements UserService {
         updateUser.setGender(user.getGender());
         return toDto(repository.save(updateUser));
     }
+    @Override
+    public UserDto getUserDetailsByEmail(String email) {
+        User getEmailResult = repository.findByEmail(email);
+        return toDto(getEmailResult);
+    }
 }

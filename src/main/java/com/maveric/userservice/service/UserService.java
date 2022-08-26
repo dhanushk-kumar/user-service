@@ -12,4 +12,5 @@ public interface UserService {
     public String deleteUser(String userId);
     public UserDto getUserDetails(String userId);
     public UserDto updateUser(long userId, User user) throws UserNotExist;
+    public UserDto  getUserDetailsByEmail(String email);
 }
