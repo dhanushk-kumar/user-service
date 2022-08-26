@@ -29,4 +29,19 @@ public class UserServiceImpl implements UserService {
         User accountResult = repository.save(account);
         return  toDto(accountResult);
     }
+
+    public List<UserDto> getUsers(Integer page, Integer pageSize) {
+        Pageable paging = (Pageable) PageRequest.of(page, pageSize);
+        Page<User> pageResult = repository.findAll(paging);
+        if(pageResult.hasContent()) {
+            return pageResult.getContent().stream()
+                    .map(
+                            user -> toDto(user)
+                    ).collect(
+                            Collectors.toList()
+                    );
+        } else {
+            return new ArrayList<>();
+        }
+    }
 }
