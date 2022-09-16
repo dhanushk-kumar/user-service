@@ -14,6 +14,10 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.maveric.userservice.Utility.ModelDtoTransformer.toDto;
+import static com.maveric.userservice.Utility.ModelDtoTransformer.toEntity;
+
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
@@ -27,7 +31,7 @@ public class UserServiceImpl implements UserService {
         if(pageResult.hasContent()) {
             return pageResult.getContent().stream()
                     .map(
-                            user -> mapper.map(user)
+                            user -> toDto(user)
                     ).collect(
                             Collectors.toList()
                     );
@@ -38,15 +42,15 @@ public class UserServiceImpl implements UserService {
     public UserDto createUser(UserDto userResponse) {
         //Adding CreatedTime
 
-        User user = mapper.map(userResponse);
+        User user = toEntity(userResponse);
         User userResult = repository.save(user);
-        return  mapper.map(userResult);
+        return  toDto(userResult);
     }
 
     @Override
     public UserDto getUserDetails(String userId) {
         User getResult=repository.findById(Long.valueOf(userId)).orElseThrow(() -> new UserNotExist("user not found"));
-        return mapper.map(getResult);
+        return toDto(getResult);
     }
 
     @Override
@@ -57,7 +61,7 @@ public class UserServiceImpl implements UserService {
 
     public UserDto getUserDetailsByEmail(String email) {
         User getEmailResult = repository.findByEmail(email);
-        return mapper.map(getEmailResult);
+        return toDto(getEmailResult);
     }
 
     @Override
@@ -72,6 +76,6 @@ public class UserServiceImpl implements UserService {
         updateUser.setAddress(user.getAddress());
         updateUser.setDateOfBirth(user.getDateOfBirth());
         updateUser.setGender(user.getGender());
-        return mapper.map(repository.save(updateUser));
+        return toDto(repository.save(updateUser));
     }
 }
